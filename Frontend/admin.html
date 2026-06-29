@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    padding:30px;
+    background:
+    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+    url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+h2{
+    text-align:center;
+    color:white;
+    font-size:36px;
+    margin-bottom:30px;
+}
+
+/* Search Area */
+
+input{
+    width:300px;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+input::placeholder{
+    color:rgba(255,255,255,0.75);
+}
+
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#4a90e2,#6a5acd);
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+    margin:4px;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(0,0,0,0.25);
+}
+
+/* Table */
+
+table{
+    width:100%;
+    margin-top:25px;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:20px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(15px);
+    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+}
+
+thead{
+    background:rgba(255,255,255,0.15);
+}
+
+th{
+    color:white;
+    padding:16px;
+    text-align:left;
+    font-size:16px;
+}
+
+td{
+    padding:15px;
+    color:white;
+    border-top:1px solid rgba(255,255,255,0.1);
+}
+
+tr:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+/* Pagination */
+
+.pagination{
+    margin-top:25px;
+    text-align:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<div style="text-align:center;">
+    <input
+    id="search"
+    placeholder="🔍 Search by username"
+    />
+
+    <button onclick="searchUser()">
+        Search
+    </button>
+</div>
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Username</th>
+<th>Email</th>
+<th>Action</th>
+</tr>
+
+</thead>
+
+<tbody id="userTable"></tbody>
+
+</table>
+
+<br><br>
+
+<div class="pagination">
+    <button onclick="previousPage()">
+        ⬅ Previous
+    </button>
+
+    <button onclick="nextPage()">
+        Next ➡
+    </button>
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

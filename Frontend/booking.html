@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Travel Booking</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+    url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+/* Navbar */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 40px;
+    background:rgba(0,0,0,0.25);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+.navbar h1{
+    color:white;
+    font-size:24px;
+    font-weight:700;
+}
+
+.navbar button{
+    background:linear-gradient(135deg,#4a90e2,#6a5acd);
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.navbar button:hover{
+    transform:translateY(-2px);
+}
+
+/* Booking Card */
+
+.container{
+    width:500px;
+    margin:50px auto;
+    padding:35px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 8px 30px rgba(0,0,0,0.3);
+}
+
+h2{
+    text-align:center;
+    color:white;
+    margin-bottom:25px;
+    font-size:32px;
+}
+
+/* Inputs */
+
+input,
+select{
+    width:100%;
+    padding:14px;
+    margin-top:14px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,255,255,0.18);
+    color:white;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+input::placeholder{
+    color:rgba(255,255,255,0.75);
+}
+
+input:focus,
+select:focus{
+    background:rgba(255,255,255,0.25);
+    box-shadow:0 0 10px rgba(74,144,226,0.8);
+}
+
+select option{
+    color:black;
+}
+
+/* Book Button */
+
+.book-btn{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.book-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Message */
+
+#message{
+    text-align:center;
+    margin-top:15px;
+    color:white;
+    font-weight:500;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <h1>Travel Website</h1>
+
+    <button onclick="logout()">
+        Logout
+    </button>
+
+</div>
+
+<div class="container">
+
+    <h2>Book Your Trip</h2>
+
+    <form id="bookingForm">
+
+        <input
+        type="text"
+        id="fullname"
+        placeholder="Full Name"
+        >
+
+        <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        >
+
+        <select id="destination">
+
+            <option value="">
+                Select Destination
+            </option>
+
+            <option value="Paris">
+                Paris
+            </option>
+
+            <option value="Turkey">
+                Turkey
+            </option>
+
+            <option value="Dubai">
+                Dubai
+            </option>
+
+            <option value="Switzerland">
+                Switzerland
+            </option>
+
+        </select>
+
+        <input
+        type="date"
+        id="travelDate"
+        >
+
+        <input
+        type="number"
+        id="persons"
+        placeholder="Number of Persons"
+        >
+
+        <button
+        type="submit"
+        class="book-btn"
+        >
+            Book Now
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+
+</div>
+
+<script src="booking.js"></script>
+
+</body>
+</html>

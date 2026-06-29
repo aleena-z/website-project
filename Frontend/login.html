@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+}
+
+.card{
+width:420px;
+padding:40px;
+border-radius:25px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.2);
+box-shadow:0 8px 32px rgba(0,0,0,0.3);
+}
+
+h2{
+text-align:center;
+color:white;
+margin-bottom:30px;
+font-size:32px;
+font-weight:700;
+}
+
+label{
+color:white;
+font-size:14px;
+margin-bottom:8px;
+display:block;
+}
+
+.field{
+margin-bottom:18px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,0.18);
+color:white;
+font-size:15px;
+outline:none;
+transition:0.3s;
+}
+
+input::placeholder{
+color:rgba(255,255,255,0.7);
+}
+
+input:focus{
+background:rgba(255,255,255,0.25);
+box-shadow:0 0 10px rgba(74,144,226,0.7);
+}
+
+.error-input{
+border:2px solid #ff4d4d;
+}
+
+.error-msg{
+color:#ffb3b3;
+font-size:13px;
+margin-top:5px;
+display:none;
+}
+
+.error-msg.show{
+display:block;
+}
+
+.alert{
+padding:12px;
+border-radius:10px;
+margin-bottom:18px;
+text-align:center;
+display:none;
+}
+
+.alert.error{
+background:#ffdddd;
+color:#b30000;
+display:block;
+}
+
+.alert.success{
+background:#d4edda;
+color:#155724;
+display:block;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#4a90e2,#6a5acd);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+margin-top:10px;
+}
+
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+button:disabled{
+opacity:0.6;
+cursor:not-allowed;
+}
+
+.bottom-link{
+text-align:center;
+margin-top:20px;
+color:white;
+font-size:14px;
+}
+
+.bottom-link a{
+color:#87cefa;
+text-decoration:none;
+font-weight:600;
+}
+
+.bottom-link a:hover{
+text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+    <div class="card">
+        <h2>Login</h2>
+        <div class="alert" id="alertBox"></div>
+        <div class="field"> <label for="email">Email</label> <input type="email" id="email"
+                placeholder="Enter your email" /> <span class="error-msg" id="emailError">Please enter a valid
+                email.</span> </div>
+        <div class="field"> <label for="password">Password</label> <input type="password" id="password"
+                placeholder="Enter your password" /> <span class="error-msg" id="passwordError">Password is
+                required.</span> </div> 
+              <button id="loginBtn" onclick="handleLogin()">Login</button>
+        <p class="bottom-link">Don't have an account? <a href="register.html">Register</a></p>
+    </div>
+
+        <script>
+async function handleLogin() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const alertBox = document.getElementById("alertBox");
+    const loginBtn = document.getElementById("loginBtn");
+
+    alertBox.style.display = "none";
+    alertBox.className = "alert";
+
+    if (!email || !password) {
+        alertBox.classList.add("error");
+        alertBox.innerText = "Email aur password required hain!";
+        return;
+    }
+
+    try {
+        loginBtn.disabled = true;
+        loginBtn.innerText = "Logging in...";
+
+        const response = await fetch("http://localhost:5000/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alertBox.classList.add("success");
+            alertBox.innerText = "Login successful! Redirecting...";
+
+            localStorage.setItem("loggedInUser", JSON.stringify(data.user));
+
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 1000);
+
+        } else {
+            alertBox.classList.add("error");
+            alertBox.innerText = data.message || "Login failed. Please register first.";
+
+            setTimeout(() => {
+                window.location.href = "register.html";
+            }, 1500);
+        }
+
+    } catch (error) {
+        console.log(error);
+        alertBox.classList.add("error");
+        alertBox.innerText = "Server error! Try again later.";
+    } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerText = "Login";
+    }
+}
+</script>
+</body>
+
+</html>
