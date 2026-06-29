@@ -42,7 +42,7 @@ A full-stack MERN-based web application developed as an academic project. The ap
 ## 📂 Project Structure
 
 ```
-Website-Project
+TravelBooking
 │
 ├── Backend
 │   ├── config
