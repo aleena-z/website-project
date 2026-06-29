@@ -1,6 +1,6 @@
 # Website Project
 
-A full-stack MERN-based web application developed as a university project. The application provides users with an intuitive interface and a secure backend for managing data.
+A full-stack MERN-based web application developed as an academic project. The application provides users with an intuitive interface and a secure backend for managing data.
 
 ---
 
